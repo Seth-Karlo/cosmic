@@ -75,6 +75,7 @@ class CsRedundant(object):
             self._redundant_off()
             return
 
+<<<<<<< HEAD:cosmic-core/systemvm/patches/centos7/opt/cosmic/router/bin/cs/CsRedundant.py
         interfaces = [interface for interface in self.address.get_interfaces() if interface.is_guest()]
         isDeviceReady = False
         dev = ''
