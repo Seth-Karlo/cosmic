@@ -883,7 +883,8 @@ public class NetworkOrchestrator extends ManagerBase implements NetworkOrchestra
     Pair<NetworkGuru, NetworkVO> implementNetwork(final long networkId, final DeployDestination dest, final ReservationContext context, final boolean isRouter)
             throws ConcurrentOperationException, ResourceUnavailableException, InsufficientCapacityException {
         Pair<NetworkGuru, NetworkVO> implemented = null;
-        if (!isRouter) {
+        final NetworkVO network = _networksDao.findById(networkId);
+        if (!isRouter || (TrafficType.Guest.equals(network.getTrafficType()) && GuestType.Sync.equals(network.getGuestType()))) {
             implemented = implementNetwork(networkId, dest, context);
         } else {
             // At the time of implementing network (using implementNetwork() method), if the VR needs to be deployed then
@@ -891,7 +892,6 @@ public class NetworkOrchestrator extends ManagerBase implements NetworkOrchestra
             // preparing VR nics. This flow creates issues in dealing with network state transitions. The original call
             // puts network in "Implementing" state and then the nested call again tries to put it into same state resulting
             // in issues. In order to avoid it, implementNetwork() call for VR is replaced with below code.
-            final NetworkVO network = _networksDao.findById(networkId);
             final NetworkGuru guru = AdapterBase.getAdapterByName(networkGurus, network.getGuruName());
             implemented = new Pair<>(guru, network);
         }

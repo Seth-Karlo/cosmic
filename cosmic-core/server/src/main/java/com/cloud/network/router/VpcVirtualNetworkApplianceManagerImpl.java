@@ -260,11 +260,6 @@ public class VpcVirtualNetworkApplianceManagerImpl extends VirtualNetworkApplian
                             domainRouterVO.getType()
                     );
                     cmds.addCommand(plugNicCmd);
-//                    // set sync network
-//                    final VirtualMachine vm = _vmDao.findById(domainRouterVO.getId());
-//                    final NicProfile nicProfile = _networkModel.getNicProfile(vm, syncNic.getNetworkId(), null);
-//                    final SetupGuestNetworkCommand setupCmd = _commandSetupHelper.createSetupGuestNetworkCommand(domainRouterVO, true, nicProfile);
-//                    cmds.addCommand(setupCmd);
                 }
                 // add VPC router to public networks
                 final List<PublicIp> sourceNat = new ArrayList<>(1);
