@@ -288,7 +288,6 @@ class updateDataBag:
     def process_ip(self, dbag):
         for ip in self.qFile.data["ip_address"]:
             # Find the right device we should use to configure the ip address
-<<<<<<< HEAD:cosmic-core/systemvm/patches/centos7/opt/cosmic/router/bin/databag/merge.py
             # vif_mac_address is a mac address per ip-address, based on the mac address of the device
             # The original macaddress of the device is sent as device_mac_address, so we will check based
             # on that macaddress.

@@ -102,7 +102,6 @@ class CsAddress(CsDataBag):
         for identifier in self.dbag:
             if identifier == "id":
                 continue
-<<<<<<< HEAD:cosmic-core/systemvm/patches/centos7/opt/cosmic/router/bin/cs/CsAddress.py
             ip = CsIP(dev, self.config)
 
             for address in self.dbag[dev]:
