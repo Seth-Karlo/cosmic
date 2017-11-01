@@ -569,9 +569,7 @@ class CsIP:
 
         # On deletion nw_type will no longer be known
         if self.get_type() in ('guest'):
-            if self.config.is_vpc() or self.config.is_router():
-                CsDevice(self.dev, self.config).configure_rp()
-                logging.error("Not able to setup source-nat for a regular router yet")
+            CsDevice(self.dev, self.macaddress, self.config).configure_rp()
 
             if self.config.has_dns() or self.config.is_dhcp():
                 dns = CsDnsmasq(self)

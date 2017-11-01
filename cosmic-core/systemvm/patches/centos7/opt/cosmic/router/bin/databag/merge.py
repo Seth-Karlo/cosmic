@@ -4,6 +4,7 @@ import logging
 import os
 import shutil
 import uuid
+import sys
 
 import cs.CsHelper as csHelper
 import cs_cmdline
