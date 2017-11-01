@@ -289,32 +289,6 @@ class updateDataBag:
     def process_ip(self, dbag):
         for ip in self.qFile.data["ip_address"]:
             # Find the right device we should use to configure the ip address
-            # vif_mac_address is a mac address per ip-address, based on the mac address of the device
-            # The original macaddress of the device is sent as device_mac_address, so we will check based
-            # on that macaddress.
-            if 'device_mac_address' in ip:
-                device_name = csHelper.get_device_from_mac_address(ip['device_mac_address'])
-                if not device_name:
-                    log_message = "Cannot find device while looking for %s. Ignoring for now, it may arrive later.." \
-                                  % ip['device_mac_address']
-                    logging.warning(log_message)
-                    print("Warning! " + log_message)
-                else:
-                    if ip['vif_mac_address'] != ip['device_mac_address']:
-                        log_message = "Found device %s based on macaddress %s so updating databag accordingly. " \
-                                      "Ignoring macaddress %s sent by mgt server, as it is not the right one." \
-                                      % (device_name, ip['device_mac_address'], ip['vif_mac_address'])
-                        ip['vif_mac_address_as_sent_by_mgt_server'] = ip['vif_mac_address']
-                    else:
-                        log_message = "The mac address as sent by the management server %s matches the one we found (%s) on device %s so that's good" \
-                                      % (ip['vif_mac_address'], ip['device_mac_address'], device_name)
-                        logging.info(log_message)
-
-                    logging.warning(log_message)
-                    print("[INFO] " + log_message)
-                    ip['vif_mac_address'] = ip['device_mac_address']
-                    ip['device'] = device_name
-                    ip['nic_dev_id'] = device_name.replace("eth", "")
             device_name = csHelper.get_device_from_mac_address(ip['mac_address'])
             if not device_name:
                 log_message = "Cannot find device while looking for %s. Ignoring for now, it may arrive later.." \
