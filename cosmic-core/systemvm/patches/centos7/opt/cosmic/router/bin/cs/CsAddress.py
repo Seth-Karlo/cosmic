@@ -102,37 +102,6 @@ class CsAddress(CsDataBag):
         for identifier in self.dbag:
             if identifier == "id":
                 continue
-            ip = CsIP(dev, self.config)
-
-            for address in self.dbag[dev]:
-                # Double check interface name based on mac address. If it doesn't match, use discovered device name
-                if address['nw_type'] not in ["control"] and (
-                        'vif_mac_address' in address or 'device_mac_address' in address):
-                    if address['source_nat']:
-                        has_sourcenat = True
-                    if 'vif_mac_address' in address:
-                        mac_address_to_check = address['vif_mac_address']
-                    if 'device_mac_address' in address:
-                        mac_address_to_check = address['device_mac_address']
-
-                    found_device = CsHelper.get_device_from_mac_address(mac_address_to_check)
-                    if found_device is False:
-                        logging.warning("While setting up interface with macaddress %s, we couldn't find a "
-                                        "matching device at this time. To be backwards compatible, let's just continue and hope for the best."
-                                        % mac_address_to_check)
-
-                    elif found_device != address['device']:
-                        logging.warning("The mgt server sends us device %s for macaddress %s but we just found it's "
-                                        "actually on device %s. Will used discovered info instead!" %
-                                        (address['device'], mac_address_to_check, found_device))
-                        address['device'] = found_device
-                        address['nic_dev_id'] = found_device.replace("eth", "")
-                    else:
-                        logging.info("The device using macaddress %s is indeed found to be at %s (%s equals %s)"
-                                     % (mac_address_to_check, found_device, found_device, address['device']))
-                else:
-                    logging.info("Skipping macaddress checks for device of type %s due to known issues. "
-                                 "We'll trust it to be on device %s. " % (address['nw_type'], address['device']))
 
             try:
                 dev = self.dbag[identifier][0]['device']
