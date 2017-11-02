@@ -2,15 +2,15 @@ package com.cloud.agent.resource.virtualnetwork.model;
 
 import java.util.List;
 
-public class StaticRoutes extends ConfigBase {
+public class StaticRoutes extends ConfigBaseTyped {
     private List<StaticRoute> routes;
 
     public StaticRoutes() {
-        super(ConfigBase.STATIC_ROUTES);
+        super(ConfigBaseTyped.STATIC_ROUTES);
     }
 
     public StaticRoutes(final List<StaticRoute> routes) {
-        super(ConfigBase.STATIC_ROUTES);
+        super(ConfigBaseTyped.STATIC_ROUTES);
         this.routes = routes;
     }
 

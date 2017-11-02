@@ -1,13 +1,13 @@
 package com.cloud.agent.resource.virtualnetwork.model;
 
-public class Site2SiteVpn extends ConfigBase {
+public class Site2SiteVpn extends ConfigBaseTyped {
 
     private String localPublicIp, localGuestCidr, localPublicGateway, peerGatewayIp, peerGuestCidrList, espPolicy, ikePolicy, ipsecPsk;
     private Long ikeLifetime, espLifetime;
     private boolean create, dpd, passive, encap;
 
     public Site2SiteVpn() {
-        super(ConfigBase.SITE2SITEVPN);
+        super(ConfigBaseTyped.SITE2SITEVPN);
     }
 
     public Site2SiteVpn(final String localPublicIp, final String localGuestCidr, final String localPublicGateway, final String peerGatewayIp, final String peerGuestCidrList,
@@ -15,7 +15,7 @@ public class Site2SiteVpn extends ConfigBase {
                         final String ikePolicy,
                         final String ipsecPsk, final Long ikeLifetime, final Long espLifetime, final boolean create, final Boolean dpd, final boolean passive, final boolean
                                 encap) {
-        super(ConfigBase.SITE2SITEVPN);
+        super(ConfigBaseTyped.SITE2SITEVPN);
         this.localPublicIp = localPublicIp;
         this.localGuestCidr = localGuestCidr;
         this.localPublicGateway = localPublicGateway;

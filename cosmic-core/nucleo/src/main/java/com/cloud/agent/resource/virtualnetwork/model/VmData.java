@@ -2,16 +2,16 @@ package com.cloud.agent.resource.virtualnetwork.model;
 
 import java.util.List;
 
-public class VmData extends ConfigBase {
+public class VmData extends ConfigBaseTyped {
     private String vmIpAddress;
     private List<String[]> vmMetadata;
 
     public VmData() {
-        super(ConfigBase.VM_METADATA);
+        super(ConfigBaseTyped.VM_METADATA);
     }
 
     public VmData(final String vmIpAddress, final List<String[]> vmMetadata) {
-        super(ConfigBase.VM_METADATA);
+        super(ConfigBaseTyped.VM_METADATA);
         this.vmIpAddress = vmIpAddress;
         this.vmMetadata = vmMetadata;
     }

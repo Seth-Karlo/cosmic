@@ -1,15 +1,15 @@
 package com.cloud.agent.resource.virtualnetwork.model;
 
-public class VmPassword extends ConfigBase {
+public class VmPassword extends ConfigBaseTyped {
     private String ipAddress;
     private String password;
 
     public VmPassword() {
-        super(ConfigBase.VM_PASSWORD);
+        super(ConfigBaseTyped.VM_PASSWORD);
     }
 
     public VmPassword(final String ipAddress, final String password) {
-        super(ConfigBase.VM_PASSWORD);
+        super(ConfigBaseTyped.VM_PASSWORD);
         this.ipAddress = ipAddress;
         this.password = password;
     }

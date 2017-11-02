@@ -1,14 +1,14 @@
 package com.cloud.agent.resource.virtualnetwork.model;
 
-public class FirewallRules extends ConfigBase {
+public class FirewallRules extends ConfigBaseTyped {
     FirewallRule[] rules;
 
     public FirewallRules() {
-        super(ConfigBase.FIREWALL_RULES);
+        super(ConfigBaseTyped.FIREWALL_RULES);
     }
 
     public FirewallRules(final FirewallRule[] rules) {
-        super(ConfigBase.FIREWALL_RULES);
+        super(ConfigBaseTyped.FIREWALL_RULES);
         this.rules = rules;
     }
 

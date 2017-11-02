@@ -35,7 +35,7 @@ public class IpAddressTO {
         this.oneToOneNat = isOneToOneNat;
     }
 
-    protected IpAddressTO() {
+    public IpAddressTO() {
     }
 
     public long getAccountId() {
@@ -44,6 +44,10 @@ public class IpAddressTO {
 
     public String getPublicIp() {
         return publicIp;
+    }
+
+    public void setPublicIp(final String publicIp) {
+        this.publicIp = publicIp;
     }
 
     public TrafficType getTrafficType() {

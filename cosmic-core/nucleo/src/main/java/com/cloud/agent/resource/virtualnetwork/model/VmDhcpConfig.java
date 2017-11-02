@@ -1,6 +1,6 @@
 package com.cloud.agent.resource.virtualnetwork.model;
 
-public class VmDhcpConfig extends ConfigBase {
+public class VmDhcpConfig extends ConfigBaseTyped {
     private String hostName;
     private String macAddress;
     private String ipv4Adress;

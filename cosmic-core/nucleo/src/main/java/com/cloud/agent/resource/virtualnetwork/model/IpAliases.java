@@ -2,15 +2,15 @@ package com.cloud.agent.resource.virtualnetwork.model;
 
 import java.util.List;
 
-public class IpAliases extends ConfigBase {
+public class IpAliases extends ConfigBaseTyped {
     List<IpAddressAlias> aliases;
 
     public IpAliases() {
-        super(ConfigBase.IP_ALIAS_CONFIG);
+        super(ConfigBaseTyped.IP_ALIAS_CONFIG);
     }
 
     public IpAliases(final List<IpAddressAlias> aliases) {
-        super(ConfigBase.IP_ALIAS_CONFIG);
+        super(ConfigBaseTyped.IP_ALIAS_CONFIG);
         this.aliases = aliases;
     }
 

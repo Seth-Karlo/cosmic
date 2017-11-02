@@ -2,15 +2,15 @@ package com.cloud.agent.resource.virtualnetwork.model;
 
 import java.util.List;
 
-public class LoadBalancerRules extends ConfigBase {
+public class LoadBalancerRules extends ConfigBaseTyped {
     List<LoadBalancerRule> rules;
 
     public LoadBalancerRules() {
-        super(ConfigBase.LOAD_BALANCER);
+        super(ConfigBaseTyped.LOAD_BALANCER);
     }
 
     public LoadBalancerRules(final List<LoadBalancerRule> rules) {
-        super(ConfigBase.LOAD_BALANCER);
+        super(ConfigBaseTyped.LOAD_BALANCER);
         this.rules = rules;
     }
 

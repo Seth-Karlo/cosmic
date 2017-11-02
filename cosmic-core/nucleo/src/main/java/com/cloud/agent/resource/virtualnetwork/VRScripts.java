@@ -2,6 +2,9 @@ package com.cloud.agent.resource.virtualnetwork;
 
 public class VRScripts {
     public final static String CONFIG_PERSIST_LOCATION = "/var/cache/cloud/";
+
+    public final static String INTERFACES_CONFIG = "interfaces.json";
+
     public final static String IP_ASSOCIATION_CONFIG = "ip_associations.json";
     public final static String GUEST_NETWORK_CONFIG = "guest_network.json";
     public final static String PRIVATE_GATEWAY_CONFIG = "private_gateway.json";

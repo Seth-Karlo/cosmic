@@ -3,15 +3,15 @@ package com.cloud.agent.resource.virtualnetwork.model;
 import java.util.LinkedList;
 import java.util.List;
 
-public class DhcpConfig extends ConfigBase {
+public class DhcpConfig extends ConfigBaseTyped {
     List<DhcpConfigEntry> entries = new LinkedList<>();
 
     public DhcpConfig() {
-        super(ConfigBase.DHCP_CONFIG);
+        super(ConfigBaseTyped.DHCP_CONFIG);
     }
 
     public DhcpConfig(final List<DhcpConfigEntry> entries) {
-        super(ConfigBase.DHCP_CONFIG);
+        super(ConfigBaseTyped.DHCP_CONFIG);
         this.entries = entries;
     }
 

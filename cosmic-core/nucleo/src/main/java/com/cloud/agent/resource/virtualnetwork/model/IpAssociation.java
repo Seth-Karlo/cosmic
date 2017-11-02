@@ -1,6 +1,6 @@
 package com.cloud.agent.resource.virtualnetwork.model;
 
-public class IpAssociation extends ConfigBase {
+public class IpAssociation extends ConfigBaseTyped {
     private IpAddress[] ipAddress;
 
     public IpAssociation() {

@@ -1,4 +1,4 @@
 package com.cloud.agent.resource.virtualnetwork.model;
 
-public abstract class ConfigBase {
+public abstract class Service {
 }

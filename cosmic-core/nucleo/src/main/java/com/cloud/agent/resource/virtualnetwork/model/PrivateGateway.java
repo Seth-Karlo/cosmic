@@ -1,6 +1,6 @@
 package com.cloud.agent.resource.virtualnetwork.model;
 
-public class PrivateGateway extends ConfigBase {
+public class PrivateGateway extends ConfigBaseTyped {
     private String ipAddress;
     private boolean sourceNat;
     private boolean add;
@@ -9,11 +9,11 @@ public class PrivateGateway extends ConfigBase {
 
     public PrivateGateway() {
         // Empty constructor for (de)serialization
-        super(ConfigBase.PRIVATE_GATEWAY);
+        super(ConfigBaseTyped.PRIVATE_GATEWAY);
     }
 
     public PrivateGateway(final String ipAddress, final boolean sourceNat, final boolean add, final String netmask, final String macAddress) {
-        super(ConfigBase.PRIVATE_GATEWAY);
+        super(ConfigBaseTyped.PRIVATE_GATEWAY);
         this.ipAddress = ipAddress;
         this.sourceNat = sourceNat;
         this.add = add;

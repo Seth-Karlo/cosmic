@@ -1,6 +1,6 @@
 package com.cloud.agent.resource.virtualnetwork.model;
 
-public class GuestNetwork extends ConfigBase {
+public class GuestNetwork extends ConfigBaseTyped {
     private boolean add;
     private String macAddress;
     private String routerGuestIp;
@@ -11,13 +11,13 @@ public class GuestNetwork extends ConfigBase {
     private String domainName;
 
     public GuestNetwork() {
-        super(ConfigBase.GUEST_NETWORK);
+        super(ConfigBaseTyped.GUEST_NETWORK);
     }
 
     public GuestNetwork(final boolean add, final String macAddress, final String routerGuestIp, final String routerGuestNetmask, final String
             routerGuestGateway,
                         final String cidr, final String dns, final String domainName) {
-        super(ConfigBase.GUEST_NETWORK);
+        super(ConfigBaseTyped.GUEST_NETWORK);
         this.add = add;
         this.macAddress = macAddress;
         this.routerGuestIp = routerGuestIp;

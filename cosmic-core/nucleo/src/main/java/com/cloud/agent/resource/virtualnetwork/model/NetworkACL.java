@@ -1,6 +1,6 @@
 package com.cloud.agent.resource.virtualnetwork.model;
 
-public class NetworkACL extends ConfigBase {
+public class NetworkACL extends ConfigBaseTyped {
     private String macAddress;
     private boolean privateGatewayAcl;
     private String nicIp;
@@ -9,12 +9,12 @@ public class NetworkACL extends ConfigBase {
     private AclRule[] egressRules;
 
     public NetworkACL() {
-        super(ConfigBase.NETWORK_ACL);
+        super(ConfigBaseTyped.NETWORK_ACL);
     }
 
     public NetworkACL(final String macAddress, final boolean privateGatewayAcl, final String nicIp, final String nicNetmask, final AclRule[] ingressRules,
                       final AclRule[] egressRules) {
-        super(ConfigBase.NETWORK_ACL);
+        super(ConfigBaseTyped.NETWORK_ACL);
         this.macAddress = macAddress;
         this.privateGatewayAcl = privateGatewayAcl;
         this.nicIp = nicIp;

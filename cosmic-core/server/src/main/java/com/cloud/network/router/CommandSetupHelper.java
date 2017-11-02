@@ -2,6 +2,7 @@ package com.cloud.network.router;
 
 import com.cloud.agent.api.SetupGuestNetworkCommand;
 import com.cloud.agent.api.SetupVRCommand;
+import com.cloud.agent.api.UpdateInterfacesCommand;
 import com.cloud.agent.api.routing.CreateIpAliasCommand;
 import com.cloud.agent.api.routing.DeleteIpAliasCommand;
 import com.cloud.agent.api.routing.DhcpEntryCommand;
@@ -35,6 +36,7 @@ import com.cloud.agent.api.to.PortForwardingRuleTO;
 import com.cloud.agent.api.to.PublicIpACLTO;
 import com.cloud.agent.api.to.StaticNatRuleTO;
 import com.cloud.agent.manager.Commands;
+import com.cloud.agent.resource.virtualnetwork.model.UpdateInterfaces;
 import com.cloud.configuration.Config;
 import com.cloud.dao.EntityManager;
 import com.cloud.db.model.Zone;
@@ -56,6 +58,7 @@ import com.cloud.network.VpnUser;
 import com.cloud.network.VpnUserVO;
 import com.cloud.network.dao.FirewallRulesDao;
 import com.cloud.network.dao.IPAddressDao;
+import com.cloud.network.dao.IPAddressVO;
 import com.cloud.network.dao.NetworkDao;
 import com.cloud.network.dao.NetworkVO;
 import com.cloud.network.dao.Site2SiteCustomerGatewayDao;
@@ -468,8 +471,18 @@ public class CommandSetupHelper {
             }
 
             final IpAssocCommand cmd;
+            final UpdateInterfacesCommand updateInterfacesCmd;
             if (ipAssocCommand.equals("IPAssocVpcCommand")) {
                 cmd = new IpAssocVpcCommand(ipsToSend);
+                updateInterfacesCmd = generateUpdateInterfacesCommand(router);
+
+                updateInterfacesCmd.setAccessDetail(NetworkElementCommand.ROUTER_IP, _routerControlHelper.getRouterControlIp(router.getId()));
+                updateInterfacesCmd.setAccessDetail(NetworkElementCommand.ROUTER_GUEST_IP, _routerControlHelper.getRouterIpInNetwork(associatedWithNetworkId, router.getId()));
+                updateInterfacesCmd.setAccessDetail(NetworkElementCommand.ROUTER_NAME, router.getInstanceName());
+                final Zone zone = zoneRepository.findOne(router.getDataCenterId());
+                updateInterfacesCmd.setAccessDetail(NetworkElementCommand.ZONE_NETWORK_TYPE, zone.getNetworkType().toString());
+
+                cmds.addCommand(updateInterfacesCmd);
             } else {
                 cmd = new IpAssocCommand(ipsToSend);
             }
@@ -481,6 +494,32 @@ public class CommandSetupHelper {
 
             cmds.addCommand(ipAssocCommand, cmd);
         }
+    }
+
+    private UpdateInterfacesCommand generateUpdateInterfacesCommand(final VirtualRouter virtualRouter) {
+        List<NicVO> nics = _nicDao.listByVmId(virtualRouter.getId());
+
+        // TODO Fix source nat case
+        List<IPAddressVO> ipAddressVOS = _ipAddressDao.listByAssociatedVpc(virtualRouter.getVpcId(), false);
+
+        NicTO[] nicTOS = (NicTO[]) nics.stream().map(nicVO -> {
+            NicTO nicTO = new NicTO();
+
+            nicTO.setMac(nicVO.getMacAddress());
+
+            return nicTO;
+        }).toArray();
+
+        IpAddressTO[] ipAddressTOS = (IpAddressTO[]) ipAddressVOS.stream().map(ipAddressVO -> {
+            IpAddressTO ipAddressTO = new IpAddressTO();
+
+            ipAddressTO.setMacAddress(NetUtils.long2Mac(ipAddressVO.getMacAddress()));
+            ipAddressTO.setPublicIp(ipAddressVO.getVmIp());
+
+            return ipAddressTO;
+        }).toArray();
+
+        return new UpdateInterfacesCommand(nicTOS, ipAddressTOS);
     }
 
     protected Map<String, ArrayList<PublicIpAddress>> getVlanIpMap(final List<? extends PublicIpAddress> ips) {

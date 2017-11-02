@@ -1,14 +1,14 @@
 package com.cloud.agent.resource.virtualnetwork.model;
 
-public class MonitorService extends ConfigBase {
+public class MonitorService extends ConfigBaseTyped {
     public String config, disableMonitoring;
 
     public MonitorService() {
-        super(ConfigBase.MONITORSERVICE);
+        super(ConfigBaseTyped.MONITORSERVICE);
     }
 
     public MonitorService(final String config, final String disableMonitoring) {
-        super(ConfigBase.MONITORSERVICE);
+        super(ConfigBaseTyped.MONITORSERVICE);
         this.config = config;
         this.disableMonitoring = disableMonitoring;
     }

@@ -1,17 +1,17 @@
 package com.cloud.agent.resource.virtualnetwork.model;
 
-public class RemoteAccessVpn extends ConfigBase {
+public class RemoteAccessVpn extends ConfigBaseTyped {
 
     public boolean create;
     public String ipRange, presharedKey, vpnServerIp, localIp, localCidr, publicInterface;
 
     public RemoteAccessVpn() {
-        super(ConfigBase.REMOTEACCESSVPN);
+        super(ConfigBaseTyped.REMOTEACCESSVPN);
     }
 
     public RemoteAccessVpn(final boolean create, final String ipRange, final String presharedKey, final String vpnServerIp, final String localIp, final String localCidr, final
     String publicInterface) {
-        super(ConfigBase.REMOTEACCESSVPN);
+        super(ConfigBaseTyped.REMOTEACCESSVPN);
         this.create = create;
         this.ipRange = ipRange;
         this.presharedKey = presharedKey;
